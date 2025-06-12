@@ -1,0 +1,75 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>WhatsApp Group Join Verification</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f2f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      width: 300px;
+    }
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background: #25d366;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #1ebea5;
+    }
+    .error {
+      color: red;
+      font-size: 0.9em;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h3>Join WhatsApp Group</h3>
+    <form id="verifyForm">
+      <input type="text" id="name" placeholder="Full Name" required />
+      <input type="text" id="contact" placeholder="Phone Number" required />
+      <input type="text" id="admission" placeholder="Admission Number (e.g. DICT/0835/M24)" required />
+      <div class="error" id="errorMsg"></div>
+      <button type="submit">Join Group</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById('verifyForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const contact = document.getElementById('contact').value.trim();
+      const admission = document.getElementById('admission').value.trim().toUpperCase();
+      const pattern = /\/(M24|S24|J24|J25|M25)$/;
+
+      if (name && contact && pattern.test(admission)) {
+        window.location.href = "https://chat.whatsapp.com/DLoTLJPDwPFL7Vuyj020C6";
+      } else {
+        document.getElementById('errorMsg').innerText = "Invalid admission number. Must end in M24, S24, J24, J25, or M25.";
+      }
+    });
+  </script>
+</body>
+</html>
