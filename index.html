@@ -17,6 +17,8 @@
       height: 100vh;
       margin: 0;
       text-align: center;
+      user-select: none;
+      -webkit-user-drag: none;
     }
     .container {
       background-color: #fff;
@@ -53,7 +55,7 @@
     }
   </style>
 </head>
-<body>
+<body oncontextmenu="return false" ondragstart="return false" onselectstart="return false">
   <div class="container">
     <h1>SIAYA POLY ONLINE SERVICES HELP DESK</h1>
     <p>Fill in the details below to verify and join the WhatsApp Group.</p>
@@ -83,7 +85,13 @@
       }
     });
 
-    // Form submission logic
+    // Block mobile long-press dev tools
+    document.addEventListener("touchstart", function(e) {
+      if (e.touches.length > 1) {
+        e.preventDefault();
+      }
+    }, { passive: false });
+
     document.getElementById('verifyForm').addEventListener('submit', function(e) {
       e.preventDefault();
 
@@ -92,7 +100,7 @@
       const admission = document.getElementById('admission').value.trim().toUpperCase();
       const errorMsg = document.getElementById('errorMsg');
 
-      const pattern = /\/(M22|S22|J22|M23|J23|S23|M24|S24|J24|M25|J25|S25)$/;
+      const pattern = /(M22|S22|J22|M23|J23|S23|M24|S24|J24|M25|J25|S25)$/;
 
       if (name && contact && pattern.test(admission)) {
         window.location.href = "https://chat.whatsapp.com/DLoTLJPDwPFL7Vuyj020C6";
