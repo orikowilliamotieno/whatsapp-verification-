@@ -11,14 +11,13 @@
     body {
       font-family: Arial, sans-serif;
       background-color: #f0f2f5;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
       margin: 0;
       text-align: center;
       user-select: none;
       -webkit-user-drag: none;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
     }
     .container {
       background-color: #fff;
@@ -26,6 +25,7 @@
       border-radius: 10px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       width: 300px;
+      margin: auto;
     }
     h1 {
       font-size: 1.2em;
@@ -53,6 +53,14 @@
       color: red;
       font-size: 0.9em;
     }
+    footer {
+      background-color: lightblue;
+      color: black;
+      text-align: center;
+      padding: 10px 0;
+      width: 100%;
+      margin-top: auto;
+    }
   </style>
 </head>
 <body oncontextmenu="return false" ondragstart="return false" onselectstart="return false">
@@ -67,6 +75,10 @@
       <button type="submit">Join Group</button>
     </form>
   </div>
+
+  <footer>
+    © 2025 Designed and Developed By Oriko William Otieno ICT. All Rights Reserved
+  </footer>
 
   <script>
     // Disable right-click
