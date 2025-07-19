@@ -67,6 +67,23 @@
   </div>
 
   <script>
+    // Disable right-click
+    document.addEventListener('contextmenu', event => event.preventDefault());
+
+    // Disable developer tools shortcuts
+    document.addEventListener('keydown', function (e) {
+      if (
+        e.key === "F12" ||
+        (e.ctrlKey && e.shiftKey && e.key === "I") ||
+        (e.ctrlKey && e.shiftKey && e.key === "J") ||
+        (e.ctrlKey && e.key === "U") ||
+        (e.ctrlKey && e.shiftKey && e.key === "C")
+      ) {
+        e.preventDefault();
+      }
+    });
+
+    // Form submission logic
     document.getElementById('verifyForm').addEventListener('submit', function(e) {
       e.preventDefault();
 
@@ -75,7 +92,7 @@
       const admission = document.getElementById('admission').value.trim().toUpperCase();
       const errorMsg = document.getElementById('errorMsg');
 
-      const pattern = /\/(M24|S24|J24|J25|M25)$/;
+      const pattern = /\/(M22|S22|J22|M23|J23|S23|M24|S24|J24|M25|J25|S25)$/;
 
       if (name && contact && pattern.test(admission)) {
         window.location.href = "https://chat.whatsapp.com/DLoTLJPDwPFL7Vuyj020C6";
