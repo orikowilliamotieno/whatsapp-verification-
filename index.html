@@ -14,7 +14,6 @@
       margin: 0;
       text-align: center;
       user-select: none;
-      -webkit-user-drag: none;
       display: flex;
       flex-direction: column;
       min-height: 100vh;
@@ -26,7 +25,6 @@
       color: white;
       font-weight: bold;
       padding: 10px 0;
-      box-sizing: border-box;
     }
     .marquee span {
       display: inline-block;
@@ -34,18 +32,14 @@
       animation: scroll-left 40s linear infinite;
     }
     @keyframes scroll-left {
-      0% {
-        transform: translateX(100%);
-      }
-      100% {
-        transform: translateX(-100%);
-      }
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
     }
     .container {
       background-color: #fff;
       padding: 20px;
       border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
       width: 300px;
       margin: auto;
     }
@@ -53,7 +47,7 @@
       font-size: 1.2em;
       margin-bottom: 10px;
     }
-    input, button {
+    input, select, button {
       width: 100%;
       padding: 10px;
       margin: 10px 0;
@@ -111,10 +105,43 @@
   <div class="container">
     <h1>SIAYA POLY ONLINE SERVICES HELP DESK</h1>
     <p>Fill in the details below to verify and join the WhatsApp Group.</p>
+
     <form id="verifyForm" novalidate>
       <input type="text" id="name" placeholder="Full Name" required />
       <input type="text" id="contact" placeholder="Phone Number" required />
-      <input type="text" id="admission" placeholder="Admission Number" required />
+
+      <select id="role" required onchange="toggleFields()">
+        <option value="">Select Role</option>
+        <option value="student">Student</option>
+        <option value="staff">Staff</option>
+      </select>
+
+      <input type="text" id="admission" placeholder="Admission Number" style="display:none;" />
+      <input type="text" id="staffNo" placeholder="Staff Number" style="display:none;" />
+
+      <select id="department" required>
+        <option value="">Select Department</option>
+        <option>Computing and Informatics</option>
+        <option>Health Sciences</option>
+        <option>Fashion Design</option>
+        <option>Recognition of Prior Learning</option>
+        <option>Agriculture</option>
+        <option>Applied Sciences</option>
+        <option>Automotive Engineering</option>
+        <option>Building and Civil Engineering</option>
+        <option>Business Studies</option>
+        <option>Clothing and Textile</option>
+        <option>Electrical and Electronics Engineering</option>
+        <option>Entrepreneurship</option>
+        <option>Institutional Management</option>
+        <option>Liberal Studies</option>
+        <option>Mechanical Engineering</option>
+        <option>Medical Engineering</option>
+        <option>Secretarial Studies</option>
+        <option>Social Work and Community Development</option>
+        <option>Hospitality and Tourism</option>
+      </select>
+
       <div class="error" id="errorMsg"></div>
       <button type="submit">Join Group</button>
     </form>
@@ -129,24 +156,12 @@
       </a>
 
       <p><strong>STUDENT PORTAL SERVICES</strong></p>
-      <a href="https://portal.siayapolytechnic.ac.ke/Home/Login?v1=638888175325142014" target="_blank">
-        STUDENT PORTAL LOGIN
-      </a>
-      <a href="https://portal.siayapolytechnic.ac.ke/Account/Register?returnUrl=%2FAppAdmin" target="_blank">
-        STUDENT PORTAL CREATION
-      </a>
-      <a href="https://portal.siayapolytechnic.ac.ke/Account/StudentLetterOfOffer?returnUrl=%2FAppAdmin" target="_blank">
-        ADMISSION LETTER DOWNLOAD
-      </a>
-      <a href="https://portal.siayapolytechnic.ac.ke/StudentApplication/ApplicationProgramme?returnUrl=%2FAppAdmin" target="_blank">
-        COURSE SELECTION & APPLICATION
-      </a>
-      <a href="https://portal.siayapolytechnic.ac.ke/Account/StudentApplication?returnUrl=%2FAppAdmin" target="_blank">
-        COURSE APPLICATION
-      </a>
-      <a href="https://portal.siayapolytechnic.ac.ke/Account/ForgotPassword" target="_blank">
-        STUDENT PORTAL PASSWORD RESET
-      </a>
+      <a href="https://portal.siayapolytechnic.ac.ke/Home/Login?v1=638888175325142014" target="_blank">STUDENT PORTAL LOGIN</a>
+      <a href="https://portal.siayapolytechnic.ac.ke/Account/Register?returnUrl=%2FAppAdmin" target="_blank">STUDENT PORTAL CREATION</a>
+      <a href="https://portal.siayapolytechnic.ac.ke/Account/StudentLetterOfOffer?returnUrl=%2FAppAdmin" target="_blank">ADMISSION LETTER DOWNLOAD</a>
+      <a href="https://portal.siayapolytechnic.ac.ke/StudentApplication/ApplicationProgramme?returnUrl=%2FAppAdmin" target="_blank">COURSE SELECTION & APPLICATION</a>
+      <a href="https://portal.siayapolytechnic.ac.ke/Account/StudentApplication?returnUrl=%2FAppAdmin" target="_blank">COURSE APPLICATION</a>
+      <a href="https://portal.siayapolytechnic.ac.ke/Account/ForgotPassword" target="_blank">STUDENT PORTAL PASSWORD RESET</a>
 
       <p><strong>COLLEGE WEBSITE LINK</strong></p>
       <a href="https://siayapolytechnic.ac.ke/" target="_blank">
@@ -160,40 +175,34 @@
   </footer>
 
   <script>
-    document.addEventListener('contextmenu', event => event.preventDefault());
-
-    document.addEventListener('keydown', function (e) {
-      if (
-        e.key === "F12" ||
-        (e.ctrlKey && e.shiftKey && e.key === "I") ||
-        (e.ctrlKey && e.shiftKey && e.key === "J") ||
-        (e.ctrlKey && e.key === "U") ||
-        (e.ctrlKey && e.shiftKey && e.key === "C")
-      ) {
-        e.preventDefault();
-      }
-    });
-
-    document.addEventListener("touchstart", function(e) {
-      if (e.touches.length > 1) {
-        e.preventDefault();
-      }
-    }, { passive: false });
+    function toggleFields() {
+      const role = document.getElementById('role').value;
+      document.getElementById('admission').style.display = role === 'student' ? 'block' : 'none';
+      document.getElementById('staffNo').style.display = role === 'staff' ? 'block' : 'none';
+    }
 
     document.getElementById('verifyForm').addEventListener('submit', function(e) {
       e.preventDefault();
 
       const name = document.getElementById('name').value.trim();
       const contact = document.getElementById('contact').value.trim();
+      const role = document.getElementById('role').value;
       const admission = document.getElementById('admission').value.trim().toUpperCase();
+      const staffNo = document.getElementById('staffNo').value.trim().toUpperCase();
       const errorMsg = document.getElementById('errorMsg');
 
       const pattern = /(M22|S22|J22|M23|J23|S23|M24|S24|J24|M25|J25|S25)$/;
 
-      if (name && contact && pattern.test(admission)) {
-        window.location.href = "https://chat.whatsapp.com/DLoTLJPDwPFL7Vuyj020C6";
+      if (name && contact && role) {
+        if (role === 'student' && pattern.test(admission)) {
+          window.location.href = "https://chat.whatsapp.com/DLoTLJPDwPFL7Vuyj020C6";
+        } else if (role === 'staff' && staffNo.length > 3) {
+          window.location.href = "https://chat.whatsapp.com/DLoTLJPDwPFL7Vuyj020C6";
+        } else {
+          errorMsg.textContent = "Invalid admission/staff number. Please check your details.";
+        }
       } else {
-        errorMsg.textContent = "Verification failed. Please ensure your name, phone number, and admission number (ending in M22–S25) are correct. Contact the Online Services Help Desk if the problem persists.";
+        errorMsg.textContent = "All fields are required.";
       }
     });
   </script>
