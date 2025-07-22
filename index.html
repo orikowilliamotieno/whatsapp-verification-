@@ -19,6 +19,28 @@
       flex-direction: column;
       min-height: 100vh;
     }
+    .marquee {
+      width: 100%;
+      overflow: hidden;
+      background: navy;
+      color: white;
+      font-weight: bold;
+      padding: 10px 0;
+      box-sizing: border-box;
+    }
+    .marquee span {
+      display: inline-block;
+      white-space: nowrap;
+      animation: scroll-left 20s linear infinite;
+    }
+    @keyframes scroll-left {
+      0% {
+        transform: translateX(100%);
+      }
+      100% {
+        transform: translateX(-100%);
+      }
+    }
     .container {
       background-color: #fff;
       padding: 20px;
@@ -64,6 +86,13 @@
   </style>
 </head>
 <body oncontextmenu="return false" ondragstart="return false" onselectstart="return false">
+
+  <div class="marquee">
+    <span>
+      The Siaya Poly Online Services Help Desk supports HELB, KUCCPS, Student Portal, Online Reporting, Email Updating. Contact: 0784151456 | Email: willieotieno15@gmail.com
+    </span>
+  </div>
+
   <div class="container">
     <h1>SIAYA POLY ONLINE SERVICES HELP DESK</h1>
     <p>Fill in the details below to verify and join the WhatsApp Group.</p>
@@ -81,10 +110,8 @@
   </footer>
 
   <script>
-    // Disable right-click
     document.addEventListener('contextmenu', event => event.preventDefault());
 
-    // Disable developer tools shortcuts
     document.addEventListener('keydown', function (e) {
       if (
         e.key === "F12" ||
@@ -97,7 +124,6 @@
       }
     });
 
-    // Block mobile long-press dev tools
     document.addEventListener("touchstart", function(e) {
       if (e.touches.length > 1) {
         e.preventDefault();
